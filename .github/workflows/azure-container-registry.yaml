@@ -67,6 +67,7 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.ROBOT_SHOP_DEV_AZURE_CLIENT_SECRET_AUTOMATION }}
         run: |
+          set -e
           source .venv/bin/activate
 
           python -m azure_scripts.main acr \
