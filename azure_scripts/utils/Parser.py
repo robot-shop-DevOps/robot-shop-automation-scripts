@@ -8,14 +8,6 @@ class Parser:
             description="Azure Automation CLI Tool"
         )
 
-        self.parser.add_argument(
-            "--log-level",
-            required=False,
-            default="INFO",
-            choices=["DEBUG", "INFO", "WARNING", "ERROR"],
-            help="Logging level"
-        )
-
         resource = self.parser.add_subparsers(dest="resource", required=True)
 
         self.acr_parser(resource)
@@ -51,6 +43,13 @@ class Parser:
             type=self.parse_date,
             help="End date in YYYY-MM-DD format"
         )
+        cleanup_tags.add_argument(
+            "--log-level",
+            required=False,
+            default="INFO",
+            choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+            help="Logging level"
+        )
 
         cleanup_manifests = acr_sub.add_parser("cleanup-manifests", help="Delete manifests between dates")
         cleanup_manifests.add_argument("--repo", required=True)
@@ -66,6 +65,13 @@ class Parser:
             required=True, 
             type=self.parse_date,
             help="End date in YYYY-MM-DD format"
+        )
+        cleanup_manifests.add_argument(
+            "--log-level",
+            required=False,
+            default="INFO",
+            choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+            help="Logging level"
         )
 
 
