@@ -1,5 +1,5 @@
 import argparse
-from datetime import datetime
+from datetime import datetime, timezone
 
 class Parser:
     def __init__(self):
@@ -77,7 +77,8 @@ class Parser:
 
     def parse_date(self, value: str):
         try:
-            return datetime.strptime(value, "%Y-%m-%d")
+            dt = datetime.strptime(value, "%Y-%m-%d")
+            return dt.replace(tzinfo=timezone.utc)
         except ValueError:
             raise argparse.ArgumentTypeError(
                 f"Invalid date format: '{value}'. Use YYYY-MM-DD."
