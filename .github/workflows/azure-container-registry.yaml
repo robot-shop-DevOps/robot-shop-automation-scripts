@@ -70,9 +70,8 @@ jobs:
           set -e
           source .venv/bin/activate
 
-          python -m azure_scripts.main acr \
+          python -m azure_scripts.main acr "${{ github.event.inputs.subcommand }}" \
           --acr-endpoint "${{ github.event.inputs.acr_endpoint }}" \
-          "${{ github.event.inputs.subcommand }}" \
           --repo "${{ github.event.inputs.repo }}" \
           --start-date "${{ github.event.inputs.start_date }}" \
           --end-date "${{ github.event.inputs.end_date }}" \
