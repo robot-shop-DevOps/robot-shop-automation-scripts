@@ -14,7 +14,7 @@ on:
       subcommand:
         description: "Sub-command to run"
         required: true
-        type: choic
+        type: choice
         options:
           - cleanup-manifests
           - cleanup-tags
