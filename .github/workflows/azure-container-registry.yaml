@@ -31,6 +31,12 @@ on:
         description: "Logging level of the application"
         default: "INFO"
         required: false
+        type: choice
+        options:
+          - DEBUG
+          - INFO
+          - WARNING
+          - ERROR
 
 jobs:
   run-script:
