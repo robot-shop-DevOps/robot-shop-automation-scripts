@@ -15,12 +15,12 @@ az_login () {
     echo "Logging into Azure..."
     az login \
     --service-principal \
-    -u $ARM_CLIENT_ID \
-    -p $ARM_CLIENT_SECRET \
-    --tenant $ARM_TENANT_ID
+    -u $client_id \
+    -p $client_secret \
+    --tenant $tenant_id
 
     az account set \
-    --subscription $ARM_SUBSCRIPTION_ID
+    --subscription $subscription_id
 }
 
 # Retrieve robot-shop/* Repositories 
