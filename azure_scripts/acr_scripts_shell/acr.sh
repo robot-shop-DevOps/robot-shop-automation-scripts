@@ -38,9 +38,9 @@ delete_digests () {
     repository="robot-shop/"$(echo $digests_file | awk -F '_' '{print $2}')
 
     echo "Deleting Digests from $digests_file"
-    while read digest; do
-        az acr repository delete -n "$registry" \
-        --repository "$repository" \
+    while read -r digest; do
+        az acr repository delete \
+        -n "$registry" \
         --image "$repository@$digest" \
         --yes 
     done \
@@ -93,7 +93,7 @@ get_repositories
 mkdir digests_to_remove
 cd digests_to_remove
 
-while read repository; do
+while read -r repository; do
     get_digests_to_remove $repository
 done \
 < ../"$registry"_repositories.txt
