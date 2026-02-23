@@ -36,7 +36,7 @@ class Filter:
 
             props = self.container_registry._get_tag_property(
                 repository=repository,
-                tag=tag.tag_name    
+                tag=tag_name    
             )
 
             if not props:

@@ -133,7 +133,7 @@ class ContainerRegistry:
     def _get_tag_property(self, repository: str, tag: str) -> ArtifactTagProperties:
         self.logger.info(f"Fetching properties for tag '{tag}' in '{repository}'")
 
-        client = self.get_client()
+        client = self._get_client()
 
         try:
             props = client.get_tag_properties(repository, tag)
@@ -152,7 +152,7 @@ class ContainerRegistry:
     def _get_manifest_property(self, repository: str, manifest: str) -> ArtifactManifestProperties:
         self.logger.info(f"Fetching properties for manifest '{manifest}' in '{repository}'")
 
-        client = self.get_client()
+        client = self._get_client()
 
         try:
             props = client.get_manifest_properties(repository, manifest)

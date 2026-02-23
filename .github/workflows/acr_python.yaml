@@ -1,4 +1,4 @@
-name: Azure Container Registry Cleanup
+name: ACR Cleanup using Python Scripts
 
 on:
   workflow_dispatch:
@@ -14,6 +14,7 @@ on:
       subcommand:
         description: "Sub-command to run"
         required: true
+        type: choice
         options:
           - cleanup-manifests
           - cleanup-tags
@@ -30,6 +31,12 @@ on:
         description: "Logging level of the application"
         default: "INFO"
         required: false
+        type: choice
+        options:
+          - DEBUG
+          - INFO
+          - WARNING
+          - ERROR
 
 jobs:
   run-script:
@@ -60,11 +67,12 @@ jobs:
           AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.ROBOT_SHOP_DEV_AZURE_CLIENT_SECRET_AUTOMATION }}
         run: |
+          set -e
           source .venv/bin/activate
 
           python -m azure_scripts.main acr \
           --acr-endpoint "${{ github.event.inputs.acr_endpoint }}" \
-          "${{ github.event.inputs.subcommand }}" \
+          ${{ github.event.inputs.subcommand }} \
           --repo "${{ github.event.inputs.repo }}" \
           --start-date "${{ github.event.inputs.start_date }}" \
           --end-date "${{ github.event.inputs.end_date }}" \
