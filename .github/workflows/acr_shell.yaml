@@ -1,0 +1,33 @@
+name: ACR Cleanup using Shell Scripts
+
+on:
+  workflow_dispatch:
+    inputs:
+      CLOUD_PROVIDER:
+        required: true
+        type: string
+
+      ENVIRONMENT:
+        required: true
+        type: string
+
+      SCRIPT_PATH:
+        required: true
+        type: choice
+        options:
+          - ./azure_scripts/acr_scripts_shell/acr.sh
+        
+
+      EXTRA_ENV_VARS:
+        required: false
+        type: string
+        description: "env vars the script expects. Pass name=value. Use | for seperation of multiple pairs"
+
+jobs:
+  shell-script:
+    uses: "robot-shop-DevOps/robot-shop-github-actions/blob/main/.github/workflows/shell-scripts.yaml@main"
+    with:
+      CLOUD_PROVIDER: ${{ github.event.inputs.CLOUD_PROVIDER }}
+      ENVIRONMENT: ${{ github.event.inputs.ENVIRONMENT }}
+      SCRIPT_PATH: ${{ github.event.inputs.SCRIPT_PATH }}
+      EXTRA_ENV_VARS: ${{ github.event.inputs.EXTRA_ENV_VARS }}
