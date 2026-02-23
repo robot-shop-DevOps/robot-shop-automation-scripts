@@ -1,4 +1,4 @@
-name: Azure Container Registry Cleanup
+name: ACR Cleanup using Python Scripts
 
 on:
   workflow_dispatch:
