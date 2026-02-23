@@ -5,11 +5,17 @@ on:
     inputs:
       CLOUD_PROVIDER:
         required: true
-        type: string
+        type: choice
+        options:
+          - aws
+          - azure
 
       ENVIRONMENT:
         required: true
-        type: string
+        type: choice
+        options:
+          - dev
+          - prod
 
       SCRIPT_PATH:
         required: true
@@ -25,7 +31,7 @@ on:
 
 jobs:
   shell-script:
-    uses: "robot-shop-DevOps/robot-shop-github-actions/blob/main/.github/workflows/shell-scripts.yaml@main"
+    uses: "robot-shop-DevOps/robot-shop-github-actions/.github/workflows/shell-scripts.yaml@main"
     with:
       CLOUD_PROVIDER: ${{ github.event.inputs.CLOUD_PROVIDER }}
       ENVIRONMENT: ${{ github.event.inputs.ENVIRONMENT }}
