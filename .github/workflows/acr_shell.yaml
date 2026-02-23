@@ -37,3 +37,4 @@ jobs:
       ENVIRONMENT: ${{ github.event.inputs.ENVIRONMENT }}
       SCRIPT_PATH: ${{ github.event.inputs.SCRIPT_PATH }}
       EXTRA_ENV_VARS: ${{ github.event.inputs.EXTRA_ENV_VARS }}
+    secrets: inherit
