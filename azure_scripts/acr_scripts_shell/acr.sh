@@ -42,7 +42,7 @@ delete_digests () {
         az acr repository delete \
         -n "$registry" \
         --image "$repository@$digest" \
-        --yes 
+        --yes || true
     done \
     < $digests_file
 }
@@ -78,7 +78,9 @@ get_digests_to_remove () {
     -n "$registry" \
     --repository "$repository" \
     --detail \
-    | jq -r '.[] | select(.name|test("^develop.") | not) ' | jq -r '.digest' \
+    | jq -r '.[] | select(.name|test("^develop.") | not) ' \
+    | jq -r '.digest' \
+    | sort -u \
     >> "$registry"_"$repository_name"_digests_to_remove.txt
 
     rm "$registry"_"$repository_name"_digests_develop_tag.txt
